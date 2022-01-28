@@ -74,7 +74,7 @@ export const addCustomOrder = () => {
     // Add a new primary key to the object
     const lastIndex = database.customOrders.length - 1
     newOrder.id = database.customOrders[lastIndex].id + 1
-
+    
     // Add a timestamp to the order
     newOrder.timestamp = Date.now()
 
