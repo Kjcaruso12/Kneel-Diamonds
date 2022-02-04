@@ -11,10 +11,14 @@
 
 .choices {
     display: flex;
-    
 }
 
 .customOrders {
     margin-left: 30px;
 }
 
+.jewelryOptions {
+    display: flex;
+    margin-top: 3rem;
+    margin-left: 30px;
+}

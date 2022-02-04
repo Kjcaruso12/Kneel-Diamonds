@@ -6,6 +6,11 @@
 
 */
 const database = {
+    jewelry: [
+        {id: 1, type: "Ring"},
+        {id: 2, type: "Earring"},
+        {id: 3, type: "Necklace"}
+    ],
     styles: [
         { id: 1, style: "Classic", price: 500 },
         { id: 2, style: "Modern", price: 710 },
@@ -28,6 +33,7 @@ const database = {
     customOrders: [
         {
             id: 1,
+            jewelryId: 1,
             metalId: 3,
             sizeId: 2,
             styleId: 3,
@@ -37,6 +43,10 @@ const database = {
     orderBuilder: {
 
     }
+}
+
+export const getJewelry = () => {
+    return database.jewelry.map(jewel => ({...jewel}))
 }
 
 export const getMetals = () => {
@@ -55,16 +65,27 @@ export const getOrders = () => {
     return database.customOrders.map(order => ({...order}))
 }
 
+export const getOrderBuilder = () => {
+    return { ...database.orderBuilder }
+}
+
+export const setJewelry = (id) => {
+    database.orderBuilder.jewelryId = id
+}
+
 export const setMetal = (id) => {
     database.orderBuilder.metalId = id
+    document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
 export const setSize = (id) => {
     database.orderBuilder.sizeId = id
+    document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
 export const setStyle = (id) => {
     database.orderBuilder.styleId = id
+    document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
 export const addCustomOrder = () => {
