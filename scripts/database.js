@@ -1,11 +1,4 @@
-/*
-
-    This module contains all of the data, or state, for the
-    application. It exports two functions that allow other
-    modules to get copies of the state.
-
-*/
-const database = {
+export const database = {
     jewelry: [
         {id: 1, type: "Ring"},
         {id: 2, type: "Earring"},
@@ -30,81 +23,9 @@ const database = {
         { id: 4, metal: "Platinum", price: 795.45 },
         { id: 5, metal: "Palladium", price: 1241.0 }
     ],
-    customOrders: [
-        {
-            id: 1,
-            jewelryId: 1,
-            metalId: 3,
-            sizeId: 2,
-            styleId: 3,
-            timestamp: 1614659931693
-        }
-    ],
+    customOrders: [],
+    
     orderBuilder: {
 
     }
-}
-
-export const getJewelry = () => {
-    return database.jewelry.map(jewel => ({...jewel}))
-}
-
-export const getMetals = () => {
-    return database.metals.map(metal => ({...metal}))
-}
-
-export const getSizes = () => {
-    return database.sizes.map(size => ({...size}))
-}
-
-export const getStyles = () => {
-    return database.styles.map(style => ({...style}))
-}
-
-export const getOrders = () => {
-    return database.customOrders.map(order => ({...order}))
-}
-
-export const getOrderBuilder = () => {
-    return { ...database.orderBuilder }
-}
-
-export const setJewelry = (id) => {
-    database.orderBuilder.jewelryId = id
-}
-
-export const setMetal = (id) => {
-    database.orderBuilder.metalId = id
-    document.dispatchEvent(new CustomEvent("stateChanged"))
-}
-
-export const setSize = (id) => {
-    database.orderBuilder.sizeId = id
-    document.dispatchEvent(new CustomEvent("stateChanged"))
-}
-
-export const setStyle = (id) => {
-    database.orderBuilder.styleId = id
-    document.dispatchEvent(new CustomEvent("stateChanged"))
-}
-
-export const addCustomOrder = () => {
-    // Copy the current state of user choices
-    const newOrder = {...database.orderBuilder}
-
-    // Add a new primary key to the object
-    const lastIndex = database.customOrders.length - 1
-    newOrder.id = database.customOrders[lastIndex].id + 1
-    
-    // Add a timestamp to the order
-    newOrder.timestamp = Date.now()
-
-    // Add the new order object to custom orders state
-    database.customOrders.push(newOrder)
-
-    // Reset the temporary state for user choices
-    database.orderBuilder = {}
-
-    // Broadcast a notification that permanent state has changed
-    document.dispatchEvent(new CustomEvent("stateChanged"))
 }
