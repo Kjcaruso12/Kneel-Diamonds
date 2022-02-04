@@ -1,5 +1,5 @@
-import { getJewelry, getOrders, getSizes, getStyles, setJewelry } from "./database.js"
-import { getMetals } from "./database.js"
+import { getJewelry, getOrderBuilder, getOrders, getSizes, getStyles, setJewelry } from "./dataAccess.js"
+import { getMetals } from "./dataAccess.js"
 
 // Remember that the function you pass to find() must return true/false
 
@@ -8,7 +8,9 @@ const buildOrderListItem = (order) => {
     const sizes = getSizes()
     const styles = getStyles()
     const jewels = getJewelry()
-    
+    const orders = getOrders()
+
+    if(orders.length) {
     const foundJewelry = jewels.find(
         (jewel) => {
             return jewel.id === order.jewelryId
@@ -68,7 +70,7 @@ const buildOrderListItem = (order) => {
     Order #${order.id} cost ${costRing}
 </li>`
 }
-
+}
 export const Orders = () => {
     /*
         Can you explain why the state variable has to be inside
